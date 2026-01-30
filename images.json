@@ -1,38 +1,22 @@
 [
   {
-    "url": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
-    "answer": "anime",
     "title": "Attack on Titan",
-    "coverUrl": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400"
-  },
-  {
-    "url": "https://images.unsplash.com/photo-1613376023733-0a73315d9b06?w=800",
     "answer": "anime",
-    "title": "Attack on Titan",
-    "coverUrl": "https://images.unsplash.com/photo-1613376023733-0a73315d9b06?w=400"
+    "screenshots": [
+      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
+      "https://images.unsplash.com/photo-1613376023733-0a73315d9b06?w=800",
+      "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800"
+    ],
+    "coverArt": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400"
   },
   {
-    "url": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800",
-    "answer": "anime",
-    "title": "Attack on Titan",
-    "coverUrl": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400"
-  },
-  {
-    "url": "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=800",
-    "answer": "ecchi",
     "title": "High School DxD",
-    "coverUrl": "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=400"
-  },
-  {
-    "url": "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=800",
     "answer": "ecchi",
-    "title": "High School DxD",
-    "coverUrl": "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=400"
-  },
-  {
-    "url": "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800",
-    "answer": "ecchi",
-    "title": "High School DxD",
-    "coverUrl": "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=400"
+    "screenshots": [
+      "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=800",
+      "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=800",
+      "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800"
+    ],
+    "coverArt": "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=400"
   }
 ]
