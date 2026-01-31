@@ -58,7 +58,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
@@ -67,19 +67,13 @@
         
         header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             animation: fadeInDown 0.8s ease-out;
         }
         
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         h1 {
@@ -127,35 +121,41 @@
         }
         
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Already played banner */
+        .already-played {
+            background: rgba(131, 56, 236, 0.2);
+            border: 2px solid var(--accent-purple);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 2rem;
         }
         
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto 2rem;
+        .already-played-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-purple);
         }
-        
-        .image-carousel {
+
+        /* Image display */
+        .image-wrap {
             position: relative;
             width: 100%;
             border-radius: 16px;
             overflow: hidden;
             aspect-ratio: 16/9;
             background: rgba(0, 0, 0, 0.4);
+            margin-bottom: 1rem;
             border: 3px solid transparent;
             background-clip: padding-box;
         }
         
-        .image-carousel::before {
+        .image-wrap::before {
             content: '';
             position: absolute;
             inset: -3px;
@@ -164,41 +164,22 @@
             z-index: -1;
         }
         
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            height: 100%;
-        }
-        
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        
-        .carousel-slide img {
+        .image-wrap img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
-        
+
         .image-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .loading {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
+            height: 100%;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
         }
         
         .spinner {
@@ -213,81 +194,37 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-            z-index: 10;
-            user-select: none;
-        }
-        
-        .carousel-nav:hover {
-            background: rgba(131, 56, 236, 0.8);
-            border-color: var(--accent-purple);
-            transform: translateY(-50%) scale(1.1);
-        }
-        
-        .carousel-nav.prev {
-            left: 10px;
-        }
-        
-        .carousel-nav.next {
-            right: 10px;
-        }
-        
-        .carousel-nav.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-        
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .dot.active {
-            background: var(--accent-purple);
-            transform: scale(1.3);
-        }
-        
-        .dot:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-        
-        .controls {
+
+        /* Image counter */
+        .image-counter {
             text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
         }
-        
+
+        /* Points indicator */
+        .points-row {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .points-row .points-val {
+            color: var(--accent-cyan);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        /* Guess buttons */
         .button-group {
             display: flex;
             gap: 1rem;
             justify-content: center;
-            margin-bottom: 2rem;
             flex-wrap: wrap;
+            margin-bottom: 1rem;
         }
         
         button {
@@ -329,10 +266,6 @@
             box-shadow: 0 15px 40px rgba(255, 0, 110, 0.6);
         }
         
-        .btn-anime:active {
-            transform: translateY(-1px);
-        }
-        
         .btn-ecchi {
             background: var(--gradient-2);
             color: white;
@@ -344,18 +277,43 @@
             box-shadow: 0 15px 40px rgba(131, 56, 236, 0.6);
         }
         
-        .btn-ecchi:active {
-            transform: translateY(-1px);
-        }
-        
         button:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
             transform: none !important;
+            box-shadow: none !important;
         }
-        
+
+        /* Reveal button */
+        .btn-reveal {
+            display: block;
+            margin: 0 auto;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 2px solid rgba(255, 255, 255, 0.2) !important;
+            padding: 0.8rem 2rem !important;
+            font-size: 0.95rem !important;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: none !important;
+            letter-spacing: 0 !important;
+        }
+
+        .btn-reveal:hover {
+            border-color: var(--accent-purple) !important;
+            color: var(--accent-purple);
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn-reveal:disabled {
+            opacity: 0.2;
+        }
+
+        /* Result panel */
         .result {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             padding: 2rem;
             border-radius: 16px;
             text-align: center;
@@ -384,6 +342,12 @@
         .result-message {
             font-size: 1.3rem;
             font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-points {
+            font-size: 1rem;
+            opacity: 0.8;
             margin-bottom: 1.5rem;
         }
         
@@ -418,33 +382,18 @@
             font-size: 0.9rem;
             opacity: 0.7;
         }
-        
-        .already-played {
-            background: rgba(131, 56, 236, 0.2);
-            border: 2px solid var(--accent-purple);
-            padding: 1.5rem;
-            border-radius: 16px;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .already-played-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--accent-purple);
-        }
-        
+
+        /* Stats */
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin-top: 2rem;
         }
         
         .stat-card {
             background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
+            padding: 1.5rem 0.5rem;
             border-radius: 12px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -461,62 +410,42 @@
         
         .stat-label {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
         }
-        
+
+        /* Timer */
         .timer {
             text-align: center;
-            margin-top: 2rem;
-            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            font-size: 1rem;
             color: var(--text-secondary);
         }
         
         .timer-value {
             color: var(--accent-cyan);
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
-        
+
+        /* Error */
         .error {
             background: rgba(255, 0, 110, 0.1);
             border: 2px solid var(--accent-pink);
             padding: 1rem;
             border-radius: 12px;
-            margin-top: 1rem;
             color: var(--accent-pink);
+            text-align: center;
         }
         
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .game-area {
-                padding: 1.5rem;
-            }
-            
-            .button-group {
-                flex-direction: column;
-            }
-            
-            button {
-                width: 100%;
-            }
-            
-            .anime-reveal {
-                flex-direction: column;
-            }
-            
-            .anime-info {
-                text-align: center;
-            }
-            
-            .carousel-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
+        @media (max-width: 600px) {
+            .container { padding: 1rem; }
+            .game-area { padding: 1.5rem; }
+            .button-group { flex-direction: column; }
+            .button-group button { width: 100%; }
+            .anime-reveal { flex-direction: column; }
+            .anime-info { text-align: center; }
+            .stats { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
         }
     </style>
 </head>
@@ -533,329 +462,254 @@
                 <div class="already-played-title">✓ You've already played today!</div>
                 <div>Come back tomorrow for a new challenge</div>
             </div>
-            
-            <div class="carousel-container">
-                <div class="image-carousel">
-                    <div class="carousel-track" id="carouselTrack">
-                        <div class="carousel-slide">
-                            <div class="image-placeholder loading">
-                                <div class="spinner"></div>
-                                <div>Loading today's challenge...</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-nav prev" id="prevBtn">‹</div>
-                    <div class="carousel-nav next" id="nextBtn">›</div>
+
+            <div class="image-wrap" id="imageWrap">
+                <div class="image-placeholder">
+                    <div class="spinner"></div>
+                    <div>Loading today's challenge...</div>
                 </div>
-                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+
+            <div class="image-counter" id="imageCounter" style="display: none;">
+                Image <span id="currentNum">1</span> of 3
+            </div>
+
+            <div class="points-row" id="pointsRow" style="display: none;">
+                ⭐ Guess now for <span class="points-val" id="pointsVal">5</span> points
+            </div>
+
+            <div class="button-group" id="guessButtons">
+                <button class="btn-anime" id="btnAnime" disabled>🎌 Anime</button>
+                <button class="btn-ecchi" id="btnEcchi" disabled>🔥 Ecchi</button>
+            </div>
+
+            <button class="btn-reveal" id="btnReveal" disabled style="display: none;">
+                👁️ Reveal next image (-2 pts)
+            </button>
+
+            <div class="result" id="result"></div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="statStreak">0</div>
+                    <div class="stat-label">Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statScore">0</div>
+                    <div class="stat-label">Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statTotal">0</div>
+                    <div class="stat-label">Played</div>
+                </div>
             </div>
             
-            <div class="controls">
-                <div class="button-group">
-                    <button class="btn-anime" id="btnAnime" disabled>
-                        🎌 Anime
-                    </button>
-                    <button class="btn-ecchi" id="btnEcchi" disabled>
-                        🔥 Ecchi
-                    </button>
-                </div>
-                
-                <div class="result" id="result"></div>
-                
-                <div class="stats">
-                    <div class="stat-card">
-                        <div class="stat-value" id="statStreak">0</div>
-                        <div class="stat-label">Current Streak</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="statCorrect">0</div>
-                        <div class="stat-label">Correct Today</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="statTotal">0</div>
-                        <div class="stat-label">Total Played</div>
-                    </div>
-                </div>
-                
-                <div class="timer">
-                    Next daily challenge in: <span class="timer-value" id="countdown">--:--:--</span>
-                </div>
+            <div class="timer">
+                Next challenge in: <span class="timer-value" id="countdown">--:--:--</span>
             </div>
         </div>
     </div>
 
     <script>
+        // --- State ---
         let currentAnime = null;
-        let currentIndex = 0;
+        let currentImageIndex = 0;   // which screenshot we're showing (0, 1, 2)
         let hasGuessed = false;
         let allAnime = [];
-        
-        // Get today's date string
+
+        const POINTS = [5, 3, 1]; // points for guessing on image 1, 2, 3
+
+        // --- Date helpers ---
         function getTodayString() {
-            const today = new Date();
-            return today.toDateString();
+            return new Date().toDateString();
         }
-        
-        // Get today's anime index based on date
+
         function getTodayIndex() {
             const today = new Date();
-            const startOfYear = new Date(today.getFullYear(), 0, 0);
-            const diff = today - startOfYear;
-            const oneDay = 1000 * 60 * 60 * 24;
-            const dayOfYear = Math.floor(diff / oneDay);
-            return dayOfYear;
+            const start = new Date(today.getFullYear(), 0, 0);
+            const diff = today - start;
+            return Math.floor(diff / (1000 * 60 * 60 * 24));
         }
-        
-        // Check if user has already played today
+
+        // --- localStorage helpers ---
         function hasPlayedToday() {
-            const todayString = getTodayString();
-            const lastPlayed = localStorage.getItem('ecchleLastPlayed');
-            return lastPlayed === todayString;
+            return localStorage.getItem('ecchleLastPlayed') === getTodayString();
         }
-        
-        // Mark today as played
+
         function markAsPlayed() {
-            const todayString = getTodayString();
-            localStorage.setItem('ecchleLastPlayed', todayString);
+            localStorage.setItem('ecchleLastPlayed', getTodayString());
         }
-        
-        // Load anime from JSON file
-        async function loadImages() {
-            try {
-                const response = await fetch('images.json');
-                if (!response.ok) {
-                    throw new Error('Failed to load images.json');
-                }
-                allAnime = await response.json();
-                
-                // Get today's anime
-                const todayIndex = getTodayIndex();
-                currentAnime = allAnime[todayIndex % allAnime.length];
-                
-                // Check if already played
-                if (hasPlayedToday()) {
-                    showAlreadyPlayed();
-                    displayCarousel(); // Still show the images
-                    // Buttons stay disabled
-                } else {
-                    // Display images in carousel
-                    displayCarousel();
-                    
-                    // Enable buttons
-                    document.getElementById('btnAnime').disabled = false;
-                    document.getElementById('btnEcchi').disabled = false;
-                }
-                
-            } catch (error) {
-                console.error('Failed to load images:', error);
-                const track = document.getElementById('carouselTrack');
-                track.innerHTML = `
-                    <div class="carousel-slide">
-                        <div class="error">
-                            <strong>Oops!</strong><br>
-                            Failed to load images. Make sure images.json is in the same folder.<br>
-                            <small>${error.message}</small>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-        
-        function showAlreadyPlayed() {
-            document.getElementById('alreadyPlayedMessage').style.display = 'block';
-            
-            // Show the result from localStorage if available
-            const lastResult = localStorage.getItem('ecchleLastResult');
-            if (lastResult) {
-                const result = JSON.parse(lastResult);
-                showResult(result.guess, result.correct, true);
-            }
-        }
-        
-        function displayCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dots = document.getElementById('carouselDots');
-            
-            // Create slides from screenshots
-            track.innerHTML = currentAnime.screenshots.map((url, i) => `
-                <div class="carousel-slide">
-                    <img src="${url}" alt="Challenge image ${i + 1}" crossorigin="anonymous">
-                </div>
-            `).join('');
-            
-            // Create dots
-            dots.innerHTML = currentAnime.screenshots.map((_, i) => `
-                <div class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>
-            `).join('');
-            
-            updateCarousel();
-        }
-        
-        function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const dots = document.querySelectorAll('.dot');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            
-            // Move track
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
-            // Update dots
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-            
-            // Update nav buttons
-            prevBtn.classList.toggle('disabled', currentIndex === 0);
-            nextBtn.classList.toggle('disabled', currentIndex === currentAnime.screenshots.length - 1);
-        }
-        
-        function nextSlide() {
-            if (currentIndex < currentAnime.screenshots.length - 1) {
-                currentIndex++;
-                updateCarousel();
-            }
-        }
-        
-        function prevSlide() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        }
-        
-        function goToSlide(index) {
-            currentIndex = index;
-            updateCarousel();
-        }
-        
-        // Update daily date badge
-        function updateDateBadge() {
-            const today = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('dailyDate').textContent = today.toLocaleDateString('en-US', options);
-        }
-        
-        // Load stats from localStorage
+
         function loadStats() {
-            const stats = JSON.parse(localStorage.getItem('ecchleStats') || '{"streak": 0, "correct": 0, "total": 0, "lastPlayed": null}');
-            
-            // Check if it's a new day
-            const today = new Date().toDateString();
-            if (stats.lastPlayed !== today) {
-                stats.correct = 0;
-            }
-            
-            return stats;
+            return JSON.parse(localStorage.getItem('ecchleStats') || '{"streak":0,"score":0,"total":0,"lastPlayed":null}');
         }
-        
-        // Save stats to localStorage
+
         function saveStats(stats) {
             localStorage.setItem('ecchleStats', JSON.stringify(stats));
         }
-        
-        // Update stats display
+
         function updateStatsDisplay() {
             const stats = loadStats();
             document.getElementById('statStreak').textContent = stats.streak;
-            document.getElementById('statCorrect').textContent = stats.correct;
+            document.getElementById('statScore').textContent = stats.score;
             document.getElementById('statTotal').textContent = stats.total;
         }
-        
-        // Make a guess
+
+        // --- UI helpers ---
+        function showImage(index) {
+            const wrap = document.getElementById('imageWrap');
+            wrap.innerHTML = `<img src="${currentAnime.screenshots[index]}" alt="Challenge image ${index + 1}">`;
+            document.getElementById('currentNum').textContent = index + 1;
+            document.getElementById('pointsVal').textContent = POINTS[index];
+        }
+
+        function updateRevealButton() {
+            const btn = document.getElementById('btnReveal');
+            if (currentImageIndex >= 2) {
+                // On the last image, no more reveals
+                btn.style.display = 'none';
+            } else {
+                btn.style.display = 'block';
+                btn.disabled = false;
+            }
+        }
+
+        // --- Core game logic ---
+        async function loadImages() {
+            try {
+                const response = await fetch('images.json');
+                if (!response.ok) throw new Error('Failed to fetch images.json');
+                allAnime = await response.json();
+
+                const todayIndex = getTodayIndex();
+                currentAnime = allAnime[todayIndex % allAnime.length];
+
+                // Show first image
+                showImage(0);
+                document.getElementById('imageCounter').style.display = 'block';
+                document.getElementById('pointsRow').style.display = 'block';
+
+                if (hasPlayedToday()) {
+                    // Already played - show banner + saved result
+                    document.getElementById('alreadyPlayedMessage').style.display = 'block';
+                    document.getElementById('btnAnime').disabled = true;
+                    document.getElementById('btnEcchi').disabled = true;
+                    document.getElementById('btnReveal').style.display = 'none';
+                    document.getElementById('pointsRow').style.display = 'none';
+
+                    const saved = localStorage.getItem('ecchleLastResult');
+                    if (saved) {
+                        const r = JSON.parse(saved);
+                        // Show the image they ended on
+                        showImage(r.imageIndex);
+                        showResult(r.isCorrect, r.points);
+                    }
+                } else {
+                    // Fresh game
+                    document.getElementById('btnAnime').disabled = false;
+                    document.getElementById('btnEcchi').disabled = false;
+                    updateRevealButton();
+                }
+
+            } catch (err) {
+                document.getElementById('imageWrap').innerHTML = `
+                    <div class="error" style="height:100%;display:flex;align-items:center;justify-content:center;padding:2rem;">
+                        <div><strong>Oops!</strong><br>Failed to load images.json<br><small>${err.message}</small></div>
+                    </div>`;
+            }
+        }
+
+        function revealNextImage() {
+            if (hasGuessed || currentImageIndex >= 2) return;
+            currentImageIndex++;
+            showImage(currentImageIndex);
+            updateRevealButton();
+        }
+
         function makeGuess(guess) {
             if (hasGuessed || !currentAnime || hasPlayedToday()) return;
-            
             hasGuessed = true;
-            const correctAnswer = currentAnime.answer;
-            const isCorrect = guess === correctAnswer;
-            
-            // Mark as played
+
+            const isCorrect = guess === currentAnime.answer;
+            const points = isCorrect ? POINTS[currentImageIndex] : 0;
+
+            // Persist
             markAsPlayed();
-            
-            // Save result to localStorage
             localStorage.setItem('ecchleLastResult', JSON.stringify({
-                guess: guess,
-                correct: isCorrect
+                isCorrect,
+                points,
+                imageIndex: currentImageIndex
             }));
-            
-            // Show result
-            showResult(guess, isCorrect, false);
-            
+
             // Update stats
             const stats = loadStats();
-            const today = new Date().toDateString();
-            
             stats.total++;
-            stats.lastPlayed = today;
-            
+            stats.lastPlayed = getTodayString();
+            stats.score += points;
             if (isCorrect) {
-                stats.correct++;
                 stats.streak++;
             } else {
                 stats.streak = 0;
             }
-            
             saveStats(stats);
             updateStatsDisplay();
-            
-            // Disable buttons
+
+            // UI
             document.getElementById('btnAnime').disabled = true;
             document.getElementById('btnEcchi').disabled = true;
+            document.getElementById('btnReveal').style.display = 'none';
+            document.getElementById('pointsRow').style.display = 'none';
+
+            showResult(isCorrect, points);
         }
-        
-        function showResult(guess, isCorrect, skipAnimation) {
-            const resultEl = document.getElementById('result');
-            resultEl.className = 'result ' + (isCorrect ? 'correct' : 'incorrect');
-            if (!skipAnimation) resultEl.classList.add('show');
-            else resultEl.style.opacity = '1';
-            
-            const correctAnswer = currentAnime.answer;
-            
-            resultEl.innerHTML = `
-                <div class="result-message">
-                    ${isCorrect ? '✓ Correct!' : '✗ Wrong!'} It's ${correctAnswer}!
-                </div>
+
+        function showResult(isCorrect, points) {
+            const el = document.getElementById('result');
+            el.className = 'result show ' + (isCorrect ? 'correct' : 'incorrect');
+
+            const pointsText = isCorrect
+                ? `+${points} point${points !== 1 ? 's' : ''}`
+                : '0 points';
+
+            el.innerHTML = `
+                <div class="result-message">${isCorrect ? '✓ Correct!' : '✗ Wrong!'} It's ${currentAnime.answer}!</div>
+                <div class="result-points">${pointsText}</div>
                 <div class="anime-reveal">
-                    <img src="${currentAnime.coverArt}" alt="${currentAnime.title}" class="anime-cover" crossorigin="anonymous">
+                    <img src="${currentAnime.coverArt}" alt="${currentAnime.title}" class="anime-cover">
                     <div class="anime-info">
                         <div class="anime-title">${currentAnime.title}</div>
-                        <div class="anime-type">${correctAnswer.toUpperCase()}</div>
+                        <div class="anime-type">${currentAnime.answer.toUpperCase()}</div>
                     </div>
                 </div>
             `;
         }
-        
-        // Countdown to next day
+
+        // --- Countdown ---
         function updateCountdown() {
             const now = new Date();
             const tomorrow = new Date(now);
             tomorrow.setDate(tomorrow.getDate() + 1);
             tomorrow.setHours(0, 0, 0, 0);
-            
             const diff = tomorrow - now;
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('countdown').textContent = 
-                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            document.getElementById('countdown').textContent =
+                `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
         }
-        
-        // Event listeners
+
+        // --- Date badge ---
+        function updateDateBadge() {
+            document.getElementById('dailyDate').textContent =
+                new Date().toLocaleDateString('en-GB', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+        }
+
+        // --- Event listeners ---
         document.getElementById('btnAnime').addEventListener('click', () => makeGuess('anime'));
         document.getElementById('btnEcchi').addEventListener('click', () => makeGuess('ecchi'));
-        document.getElementById('prevBtn').addEventListener('click', prevSlide);
-        document.getElementById('nextBtn').addEventListener('click', nextSlide);
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (hasGuessed) return;
-            if (e.key === 'ArrowLeft') prevSlide();
-            if (e.key === 'ArrowRight') nextSlide();
-        });
-        
-        // Initialize
+        document.getElementById('btnReveal').addEventListener('click', revealNextImage);
+
+        // --- Init ---
         updateDateBadge();
         updateStatsDisplay();
         updateCountdown();
