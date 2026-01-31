@@ -1,22 +1,12 @@
 [
   {
-    "title": "Attack on Titan",
-    "answer": "anime",
-    "screenshots": [
-      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800",
-      "https://images.unsplash.com/photo-1613376023733-0a73315d9b06?w=800",
-      "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800"
-    ],
-    "coverArt": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400"
-  },
-  {
-    "title": "High School DxD",
+    "title": "Don't Touch Kotesashi",
     "answer": "ecchi",
     "screenshots": [
-      "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=800",
-      "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=800",
-      "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800"
+      "images/sawaranaide/1.png",
+      "images/sawaranaide/2.png",
+      "images/sawaranaide/3.png"
     ],
-    "coverArt": "https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=400"
+    "coverArt": "images/sawaranaide/cover.jpg"
   }
 ]
