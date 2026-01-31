@@ -195,6 +195,36 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Nav arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: all 0.3s;
+            z-index: 10;
+            user-select: none;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(131, 56, 236, 0.8);
+            border-color: var(--accent-purple);
+        }
+
+        .nav-arrow.prev { left: 10px; }
+        .nav-arrow.next { right: 10px; }
+        .nav-arrow.hidden { display: none; }
+
         /* Image counter */
         .image-counter {
             text-align: center;
@@ -468,6 +498,8 @@
                     <div class="spinner"></div>
                     <div>Loading today's challenge...</div>
                 </div>
+                <div class="nav-arrow prev hidden" id="navPrev">‹</div>
+                <div class="nav-arrow next hidden" id="navNext">›</div>
             </div>
 
             <div class="image-counter" id="imageCounter" style="display: none;">
@@ -513,11 +545,12 @@
     <script>
         // --- State ---
         let currentAnime = null;
-        let currentImageIndex = 0;   // which screenshot we're showing (0, 1, 2)
+        let highestRevealed = 0;  // furthest image unlocked (0, 1, or 2)
+        let viewingIndex = 0;     // which image the user is currently looking at
         let hasGuessed = false;
         let allAnime = [];
 
-        const POINTS = [5, 3, 1]; // points for guessing on image 1, 2, 3
+        const POINTS = [5, 3, 1]; // points available based on highestRevealed
 
         // --- Date helpers ---
         function getTodayString() {
@@ -558,20 +591,43 @@
         // --- UI helpers ---
         function showImage(index) {
             const wrap = document.getElementById('imageWrap');
-            wrap.innerHTML = `<img src="${currentAnime.screenshots[index]}" alt="Challenge image ${index + 1}">`;
+            // Keep the nav arrows, just swap the img
+            const existing = wrap.querySelector('img');
+            if (existing) {
+                existing.src = currentAnime.screenshots[index];
+                existing.alt = `Challenge image ${index + 1}`;
+            } else {
+                // First load — replace placeholder but keep arrows
+                const prev = document.getElementById('navPrev');
+                const next = document.getElementById('navNext');
+                wrap.innerHTML = `<img src="${currentAnime.screenshots[index]}" alt="Challenge image ${index + 1}">`;
+                wrap.appendChild(prev);
+                wrap.appendChild(next);
+            }
             document.getElementById('currentNum').textContent = index + 1;
-            document.getElementById('pointsVal').textContent = POINTS[index];
+            viewingIndex = index;
+            updateNavArrows();
+        }
+
+        function updateNavArrows() {
+            const prev = document.getElementById('navPrev');
+            const next = document.getElementById('navNext');
+            prev.classList.toggle('hidden', viewingIndex === 0);
+            next.classList.toggle('hidden', viewingIndex >= highestRevealed);
         }
 
         function updateRevealButton() {
             const btn = document.getElementById('btnReveal');
-            if (currentImageIndex >= 2) {
-                // On the last image, no more reveals
+            if (highestRevealed >= 2) {
                 btn.style.display = 'none';
             } else {
                 btn.style.display = 'block';
                 btn.disabled = false;
             }
+        }
+
+        function updatePointsDisplay() {
+            document.getElementById('pointsVal').textContent = POINTS[highestRevealed];
         }
 
         // --- Core game logic ---
@@ -600,7 +656,7 @@
                     const saved = localStorage.getItem('ecchleLastResult');
                     if (saved) {
                         const r = JSON.parse(saved);
-                        // Show the image they ended on
+                        highestRevealed = r.imageIndex;
                         showImage(r.imageIndex);
                         showResult(r.isCorrect, r.points);
                     }
@@ -609,6 +665,7 @@
                     document.getElementById('btnAnime').disabled = false;
                     document.getElementById('btnEcchi').disabled = false;
                     updateRevealButton();
+                    updatePointsDisplay();
                 }
 
             } catch (err) {
@@ -620,10 +677,16 @@
         }
 
         function revealNextImage() {
-            if (hasGuessed || currentImageIndex >= 2) return;
-            currentImageIndex++;
-            showImage(currentImageIndex);
+            if (hasGuessed || highestRevealed >= 2) return;
+            highestRevealed++;
+            showImage(highestRevealed);  // jump to the new image
             updateRevealButton();
+            updatePointsDisplay();
+        }
+
+        function navigateTo(index) {
+            if (index < 0 || index > highestRevealed) return;
+            showImage(index);
         }
 
         function makeGuess(guess) {
@@ -631,14 +694,14 @@
             hasGuessed = true;
 
             const isCorrect = guess === currentAnime.answer;
-            const points = isCorrect ? POINTS[currentImageIndex] : 0;
+            const points = isCorrect ? POINTS[highestRevealed] : 0;
 
             // Persist
             markAsPlayed();
             localStorage.setItem('ecchleLastResult', JSON.stringify({
                 isCorrect,
                 points,
-                imageIndex: currentImageIndex
+                imageIndex: highestRevealed
             }));
 
             // Update stats
@@ -708,6 +771,14 @@
         document.getElementById('btnAnime').addEventListener('click', () => makeGuess('anime'));
         document.getElementById('btnEcchi').addEventListener('click', () => makeGuess('ecchi'));
         document.getElementById('btnReveal').addEventListener('click', revealNextImage);
+        document.getElementById('navPrev').addEventListener('click', () => navigateTo(viewingIndex - 1));
+        document.getElementById('navNext').addEventListener('click', () => navigateTo(viewingIndex + 1));
+
+        // Keyboard nav
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') navigateTo(viewingIndex - 1);
+            if (e.key === 'ArrowRight') navigateTo(viewingIndex + 1);
+        });
 
         // --- Init ---
         updateDateBadge();
